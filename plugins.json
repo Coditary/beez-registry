@@ -74,8 +74,9 @@
         "coditary"
       ],
       "source": {
-        "type": "index",
-        "url": "https://github.com/Coditary/Beez/releases/latest/download/plugins/index.json"
+        "type": "git",
+        "url": "github:Coditary/beez-coverage",
+        "ref": "1.0.0"
       }
     },
     {
@@ -88,8 +89,9 @@
         "coditary"
       ],
       "source": {
-        "type": "index",
-        "url": "https://github.com/Coditary/Beez/releases/latest/download/plugins/index.json"
+        "type": "git",
+        "url": "github:Coditary/beez-cppcheck",
+        "ref": "1.0.0"
       }
     },
     {
@@ -102,8 +104,9 @@
         "coditary"
       ],
       "source": {
-        "type": "index",
-        "url": "https://github.com/Coditary/Beez/releases/latest/download/plugins/index.json"
+        "type": "git",
+        "url": "github:Coditary/beez-ctest",
+        "ref": "1.0.0"
       }
     },
     {
@@ -131,8 +134,9 @@
         "coditary"
       ],
       "source": {
-        "type": "index",
-        "url": "https://github.com/Coditary/Beez/releases/latest/download/plugins/index.json"
+        "type": "git",
+        "url": "github:Coditary/beez-fuzzer",
+        "ref": "1.0.0"
       }
     },
     {
@@ -160,8 +164,9 @@
         "coditary"
       ],
       "source": {
-        "type": "index",
-        "url": "https://github.com/Coditary/Beez/releases/latest/download/plugins/index.json"
+        "type": "git",
+        "url": "github:Coditary/beez-pipeline",
+        "ref": "1.0.0"
       }
     }
   ]

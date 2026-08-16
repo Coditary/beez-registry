@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "packages": [
+    {
+      "name": "beez-cli",
+      "version": "1.0.2",
+      "release": 1,
+      "revision": 0,
+      "architecture": "aarch64",
+      "system": ["linux"],
+      "summary": "Beez build and task orchestrator",
+      "url": "https://github.com/Coditary/Beez/releases/download/v1.0.2/beez-1.0.2-linux-aarch64.rqp",
+      "packageSha256": "6290d31569143941be5352bcd9e690fed6e193549a9c7f4c2778814d72f71968",
+      "tags": ["cli", "build", "orchestrator", "beez"]
+    },
+    {
+      "name": "beez-cli",
+      "version": "1.0.2",
+      "release": 1,
+      "revision": 0,
+      "architecture": "x86_64",
+      "system": ["linux"],
+      "summary": "Beez build and task orchestrator",
+      "url": "https://github.com/Coditary/Beez/releases/download/v1.0.2/beez-1.0.2-linux-x86_64.rqp",
+      "packageSha256": "8b2bae6f47125363d3053c1d56751f85093fd1494fc9f5964d2a80ec7daeac97",
+      "tags": ["cli", "build", "orchestrator", "beez"]
+    },
+    {
+      "name": "beez-cli",
+      "version": "1.0.2",
+      "release": 1,
+      "revision": 0,
+      "architecture": "aarch64",
+      "system": ["macos"],
+      "summary": "Beez build and task orchestrator",
+      "url": "https://github.com/Coditary/Beez/releases/download/v1.0.2/beez-1.0.2-macos-aarch64.rqp",
+      "packageSha256": "7734db5f0bd56df88fdd60f2270869a856e1c91ec881290295051534ba2bba87",
+      "tags": ["cli", "build", "orchestrator", "beez"]
+    },
+    {
+      "name": "beez-cli",
+      "version": "1.0.2",
+      "release": 1,
+      "revision": 0,
+      "architecture": "x86_64",
+      "system": ["macos"],
+      "summary": "Beez build and task orchestrator",
+      "url": "https://github.com/Coditary/Beez/releases/download/v1.0.2/beez-1.0.2-macos-x86_64.rqp",
+      "packageSha256": "091a9e839e717de8d4d260d60dd45b8ae69f8b00adfa7971d551694f923f9246",
+      "tags": ["cli", "build", "orchestrator", "beez"]
+    }
+  ]
+}

@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 1,
+  "plugins": [
+    {
+      "id": "coditary/clang",
+      "version": "1.0.0",
+      "description": "Clang compile and link steps from compile_commands.json",
+      "tags": [
+        "build",
+        "clang",
+        "coditary"
+      ],
+      "source": {
+        "type": "git",
+        "url": "github:Coditary/beez-clang",
+        "path": "clang",
+        "ref": "1.0.0"
+      }
+    },
+    {
+      "id": "coditary/clang-format",
+      "version": "1.0.0",
+      "description": "Incremental clang-format check and apply",
+      "tags": [
+        "format",
+        "clang",
+        "coditary"
+      ],
+      "source": {
+        "type": "git",
+        "url": "github:Coditary/beez-clang",
+        "path": "clang-format",
+        "ref": "1.0.0"
+      }
+    },
+    {
+      "id": "coditary/clang-tidy",
+      "version": "1.0.0",
+      "description": "Incremental clang-tidy lint, analyzer, and security checks",
+      "tags": [
+        "lint",
+        "clang",
+        "coditary"
+      ],
+      "source": {
+        "type": "git",
+        "url": "github:Coditary/beez-clang",
+        "path": "clang-tidy",
+        "ref": "1.0.0"
+      }
+    },
+    {
+      "id": "coditary/conan",
+      "version": "1.0.0",
+      "description": "Export Conan dependency graph (JSON)",
+      "tags": [
+        "conan",
+        "dependencies",
+        "coditary"
+      ],
+      "source": {
+        "type": "git",
+        "url": "github:Coditary/beez-conan",
+        "ref": "1.0.0"
+      }
+    },
+    {
+      "id": "coditary/coverage",
+      "version": "1.0.0",
+      "description": "Coverage HTML report and threshold enforcement",
+      "tags": [
+        "coverage",
+        "test",
+        "coditary"
+      ],
+      "source": {
+        "type": "index",
+        "url": "https://github.com/Coditary/Beez/releases/latest/download/plugins/index.json"
+      }
+    },
+    {
+      "id": "coditary/cppcheck",
+      "version": "1.0.0",
+      "description": "Incremental cppcheck static analysis",
+      "tags": [
+        "lint",
+        "static-analysis",
+        "coditary"
+      ],
+      "source": {
+        "type": "index",
+        "url": "https://github.com/Coditary/Beez/releases/latest/download/plugins/index.json"
+      }
+    },
+    {
+      "id": "coditary/ctest",
+      "version": "1.0.0",
+      "description": "CTest suite runs for unit, integration, coverage, and sanitizer workflows",
+      "tags": [
+        "test",
+        "ctest",
+        "coditary"
+      ],
+      "source": {
+        "type": "index",
+        "url": "https://github.com/Coditary/Beez/releases/latest/download/plugins/index.json"
+      }
+    },
+    {
+      "id": "coditary/cyclonedx",
+      "version": "1.0.0",
+      "description": "CycloneDX SBOM validation and merge",
+      "tags": [
+        "sbom",
+        "security",
+        "coditary"
+      ],
+      "source": {
+        "type": "git",
+        "url": "github:Coditary/beez-cyclonedx",
+        "ref": "1.0.0"
+      }
+    },
+    {
+      "id": "coditary/fuzzer",
+      "version": "1.0.0",
+      "description": "libFuzzer smoke, corpus, seed-verify, and torture runs",
+      "tags": [
+        "fuzz",
+        "security",
+        "coditary"
+      ],
+      "source": {
+        "type": "index",
+        "url": "https://github.com/Coditary/Beez/releases/latest/download/plugins/index.json"
+      }
+    },
+    {
+      "id": "coditary/osv-audit",
+      "version": "1.0.0",
+      "description": "OSV vulnerability audit for Conan lockfiles",
+      "tags": [
+        "security",
+        "audit",
+        "coditary"
+      ],
+      "source": {
+        "type": "git",
+        "url": "github:Coditary/beez-osv-audit",
+        "ref": "1.0.0"
+      }
+    },
+    {
+      "id": "coditary/pipeline",
+      "version": "1.0.0",
+      "description": "Standard staged workflows (build, quality, coverage, fuzz, standard, …)",
+      "tags": [
+        "workflow",
+        "pipeline",
+        "coditary"
+      ],
+      "source": {
+        "type": "index",
+        "url": "https://github.com/Coditary/Beez/releases/latest/download/plugins/index.json"
+      }
+    }
+  ]
+}

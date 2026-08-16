@@ -13,6 +13,51 @@ local function starts_with(value, prefix)
   return tostring(value or ""):sub(1, #prefix) == prefix
 end
 
+local function read_proc_environ_value(name)
+  if os ~= nil and type(os.getenv) == "function" then
+    local current = os.getenv(tostring(name or ""))
+    if current ~= nil and current ~= "" then
+      return trim(current)
+    end
+  end
+
+  local handle = io.open("/proc/self/environ", "rb")
+  if handle == nil then
+    return nil
+  end
+  local payload = handle:read("*a")
+  handle:close()
+  if payload == nil or payload == "" then
+    return nil
+  end
+
+  local prefix = tostring(name or "") .. "="
+  for entry in tostring(payload):gmatch("[^%z]+") do
+    if starts_with(entry, prefix) then
+      return trim(entry:sub(#prefix + 1))
+    end
+  end
+  return nil
+end
+
+local function exec_run(context, command)
+  if context ~= nil and context.exec ~= nil and type(context.exec.run) == "function" then
+    return context.exec.run(command)
+  end
+  if reqpack ~= nil and reqpack.exec ~= nil and type(reqpack.exec.run) == "function" then
+    return reqpack.exec.run(command)
+  end
+  return nil
+end
+
+local function run_command(context, command)
+  local result = exec_run(context, command)
+  if result ~= nil then
+    return result.success == true, trim(result.stdout or ""), tonumber(result.exitCode) or 1
+  end
+  return run_shell(command)
+end
+
 local function join_path(...)
   local parts = {}
   for index = 1, select("#", ...) do
@@ -216,7 +261,7 @@ local function read_json_file(path)
   return value
 end
 
-local function fetch_json(url)
+local function fetch_json(url, context)
   local target = trim(url)
   if starts_with(target, "file://") then
     return read_json_file(target:sub(8))
@@ -224,7 +269,7 @@ local function fetch_json(url)
   if starts_with(target, "/") then
     return read_json_file(target)
   end
-  local ok, output, code = run_shell("curl -fsSL " .. shell_quote(target))
+  local ok, output, code = run_command(context, "curl -fsSL " .. shell_quote(target))
   if not ok then
     return nil, "failed to fetch " .. target .. " (exit " .. tostring(code) .. ")"
   end
@@ -236,11 +281,11 @@ local function fetch_json(url)
 end
 
 local function cache_home()
-  local cache_home_env = os.getenv("XDG_CACHE_HOME")
+  local cache_home_env = read_proc_environ_value("XDG_CACHE_HOME")
   if cache_home_env ~= nil and cache_home_env ~= "" then
     return cache_home_env
   end
-  local home = os.getenv("HOME")
+  local home = read_proc_environ_value("HOME")
   if home == nil or home == "" then
     return nil
   end
@@ -248,11 +293,11 @@ local function cache_home()
 end
 
 local function data_home()
-  local data_home_env = os.getenv("XDG_DATA_HOME")
+  local data_home_env = read_proc_environ_value("XDG_DATA_HOME")
   if data_home_env ~= nil and data_home_env ~= "" then
     return data_home_env
   end
-  local home = os.getenv("HOME")
+  local home = read_proc_environ_value("HOME")
   if home == nil or home == "" then
     return nil
   end
@@ -386,7 +431,7 @@ local function refresh_catalog(context, paths)
     if repository.enabled ~= false then
       local url = trim(repository.url)
       if url ~= "" then
-        local payload, fetch_error = fetch_json(url)
+        local payload, fetch_error = fetch_json(url, context)
         if payload == nil then
           return nil, fetch_error
         end
@@ -454,9 +499,9 @@ local function select_index_package(index, plugin_id)
   return nil
 end
 
-local function download_file(url, destination)
+local function download_file(url, destination, context)
   run_shell("mkdir -p " .. shell_quote(destination:match("^(.*)/[^/]+$") or "."))
-  local ok, output, code = run_shell("curl -fL " .. shell_quote(url) .. " -o " .. shell_quote(destination))
+  local ok, output, code = run_command(context, "curl -fL " .. shell_quote(url) .. " -o " .. shell_quote(destination))
   if not ok then
     return false, "download failed (" .. tostring(code) .. "): " .. trim(output)
   end
@@ -637,7 +682,7 @@ local function install_from_index(context, paths, plugin_id, catalog_entry)
   if trim(source.type) ~= "" and trim(source.type) ~= "index" then
     return false, "catalog entry does not provide index source for " .. plugin_id
   end
-  local index, fetch_error = fetch_json(trim(source.url))
+  local index, fetch_error = fetch_json(trim(source.url), context)
   if index == nil then
     return false, fetch_error
   end
@@ -648,7 +693,7 @@ local function install_from_index(context, paths, plugin_id, catalog_entry)
   local temp_dir = join_path(paths.index_root, "downloads")
   local archive_name = package_entry.url:match("/([^/]+)$") or "plugin.rqp"
   local archive_path = join_path(temp_dir, archive_name)
-  local downloaded, download_error = download_file(package_entry.url, archive_path)
+  local downloaded, download_error = download_file(package_entry.url, archive_path, context)
   if not downloaded then
     return false, download_error
   end
@@ -694,7 +739,7 @@ local function parse_package_spec(pkg)
     source = trim(pkg.source)
   end
   if (source == nil or source == "") then
-    local env_source = trim(os.getenv("BEEZ_PLUGIN_SOURCE"))
+    local env_source = trim(read_proc_environ_value("BEEZ_PLUGIN_SOURCE") or "")
     if env_source ~= "" then
       source = env_source
     end

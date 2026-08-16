@@ -318,10 +318,10 @@ end
 local function state_paths(cache_root)
   return {
     cache_root = cache_root,
-    plugins_root = join_path(cache_root, "beez", "plugins"),
-    index_root = join_path(cache_root, "beez", "index"),
-    installed_path = join_path(cache_root, "beez", "index", "installed.json"),
-    catalog_cache_path = join_path(cache_root, "beez", "index", "catalog.json"),
+    plugins_root = join_path(cache_root, "plugins"),
+    index_root = join_path(cache_root, "index"),
+    installed_path = join_path(cache_root, "index", "installed.json"),
+    catalog_cache_path = join_path(cache_root, "index", "catalog.json"),
   }
 end
 

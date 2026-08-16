@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "repositories": [
+    {
+      "id": "beez-default",
+      "url": "https://raw.githubusercontent.com/Coditary/beez-registry/main/plugins.json",
+      "priority": 0,
+      "enabled": true
+    }
+  ]
+}

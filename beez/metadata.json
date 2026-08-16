@@ -1,0 +1,8 @@
+{
+  "formatVersion": 1,
+  "name": "beez",
+  "version": "1.0.3",
+  "summary": "ReqPack Beez plugin manager",
+  "description": "ReqPack plugin for Beez workflow plugin catalogs, .rqp installs, and git fallbacks",
+  "license": "Apache-2.0"
+}

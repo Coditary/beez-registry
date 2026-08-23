@@ -7,9 +7,13 @@ Catalog of published Beez workflow plugins. The `beez` ReqPack package manager r
 
 ```
 beez-registry/
-  plugins.json    # plugin catalog (id, version, description, source)
+  plugins.json          # plugin catalog (id, version, description, source)
+  beez-cli-index.json   # binary downloads for beez-cli
   README.md
 ```
+
+The ReqPack plugin implementation for Beez is in a separate repository:
+[Coditary/rqp-plugin-beez](https://github.com/Coditary/rqp-plugin-beez)
 
 ## How discovery works
 

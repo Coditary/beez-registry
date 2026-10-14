@@ -30,41 +30,31 @@ plugins.json (this repo)
 
 ## Adding or updating plugins
 
-Official Coditary plugins are developed in [Coditary/Beez](https://github.com/Coditary/Beez)
-under `plugins/coditary/<name>/<version>/`.
+Official Coditary workflow plugins live in the monorepo
+[Coditary/beez-plugins](https://github.com/Coditary/beez-plugins), organized as
+`<letter>/beez-<name>/` (letter = first character after the `beez-` prefix).
 
-After changing plugin sources in Beez, refresh this catalog:
+`plugins.json` entries use:
 
-```bash
-cd ../Beez
-lua scripts/ci/sync_plugin_catalog.lua
+```json
+"source": {
+  "type": "git",
+  "url": "github:Coditary/beez-plugins",
+  "path": "g/beez-go",
+  "ref": "1.0.0"
+}
 ```
 
-Review the diff in `../beez-registry/plugins.json`, commit, and push.
+Clang sub-packages use paths under `c/beez-clang/` (`clang`, `clang-format`, `clang-tidy`).
 
 Third-party plugins can be added directly to `plugins.json` if they publish their own
 release index, or via `source` in `build.lua` (`github:org/repo`) without a catalog entry.
-
-Standalone plugin repos are bootstrapped under `~/Dev/Coditary/beez-plugins/` from the
-Beez monorepo (`lua scripts/ci/bootstrap_standalone_plugins.lua`). Suggested naming:
-`Coditary/beez-plugin-<name>`.
-
-Clang plugins use the shared monorepo `Coditary/beez-clang` (see `lua scripts/ci/bootstrap_beez_clang_monorepo.lua`).
 
 ### Monorepo install
 
 Git catalog entries and `build.lua` sources support repository subdirectories:
 
-```json
-"source": {
-  "type": "git",
-  "url": "github:Coditary/beez-clang",
-  "path": "clang-format",
-  "ref": "1.0.0"
-}
-```
-
-Shorthand in `build.lua`: `source = "github:Coditary/beez-clang#clang-format"`.
+Shorthand in `build.lua`: `source = "github:Coditary/beez-plugins#g/beez-go"`.
 
 ## PM configuration
 
